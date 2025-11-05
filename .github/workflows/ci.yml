@@ -132,10 +132,14 @@ jobs:
         echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
         echo "local_version=$LOCAL_VERSION" >> $GITHUB_OUTPUT
 
+    - name: Setup NPM authentication
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
     - name: Publish to NPM
       if: steps.npm-version.outputs.current_version != steps.npm-version.outputs.local_version
       run: |
         echo "Publishing version ${{ steps.npm-version.outputs.local_version }} to NPM..."
         npm publish
-      env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
