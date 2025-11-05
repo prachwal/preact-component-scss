@@ -8,3 +8,6 @@ render(
         <App />
     </ThemeProvider>
 , document.getElementById('app')!)
+
+// Remove loading flash by showing content after hydration
+document.documentElement.classList.remove('no-js')

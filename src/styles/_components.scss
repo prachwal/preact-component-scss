@@ -7,6 +7,89 @@
   text-align: center;
 }
 
+// Header styles
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-card-border);
+  padding: calc(var(--spacing-base) * 0.5);
+
+  .header-content {
+    max-width: min(1280px, 90vw);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--spacing-base) * 0.5);
+  }
+
+  .logos {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-base) * 0.3);
+
+    .logo {
+      height: clamp(2em, 8vw, 3.5em);
+      padding: calc(var(--spacing-base) * 0.2);
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .theme-toggle {
+    background: var(--color-button-bg);
+    border: 1px solid var(--color-link);
+    border-radius: $border-radius-button;
+    padding: calc(var(--spacing-base) * 0.3);
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: var(--color-link);
+      color: var(--color-bg);
+    }
+  }
+}
+
+// Footer styles
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--color-bg);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--color-card-border);
+  padding: calc(var(--spacing-base) * 0.75);
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--color-read-docs);
+}
+
+// Main content adjustments for fixed header/footer
+main {
+  margin-top: 120px; // Space for fixed header
+  margin-bottom: 80px; // Space for fixed footer
+  // min-height: calc(100vh - 200px); // Ensure minimum height
+}
+
 // Logo styles
 .logo {
   height: var(--logo-size);
@@ -45,6 +128,39 @@
     padding: calc(var(--spacing-base) * 0.5);
   }
 
+  header {
+    padding: calc(var(--spacing-base) * 0.4);
+
+    .header-content {
+      gap: calc(var(--spacing-base) * 0.3);
+    }
+
+    h1 {
+      font-size: clamp(1rem, 6vw, 1.5rem);
+    }
+
+    .theme-toggle {
+      font-size: 0.9em;
+      padding: calc(var(--spacing-base) * 0.25);
+      min-width: 35px;
+    }
+
+    .logos .logo {
+      height: clamp(2.2em, 10vw, 3em);
+      padding: calc(var(--spacing-base) * 0.15);
+    }
+  }
+
+  footer {
+    padding: calc(var(--spacing-base) * 0.5);
+    font-size: 0.8em;
+  }
+
+  main {
+    margin-top: 80px;
+    margin-bottom: 60px;
+  }
+
   .logo {
     height: clamp(3em, 15vw, 5em);
     padding: calc(var(--spacing-base) * 0.5);
@@ -62,6 +178,49 @@
 }
 
 @media (max-width: $breakpoint-mobile) {
+  header {
+    padding: calc(var(--spacing-base) * 0.3);
+
+    .header-content {
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: calc(var(--spacing-base) * 0.2);
+    }
+
+    h1 {
+      order: -1;
+      width: 100%;
+      text-align: center;
+      margin-bottom: calc(var(--spacing-base) * 0.2);
+      font-size: clamp(0.9rem, 7vw, 1.2rem);
+    }
+
+    .logos {
+      gap: calc(var(--spacing-base) * 0.2);
+    }
+
+    .logos .logo {
+      height: clamp(1.8em, 12vw, 2.5em);
+      padding: calc(var(--spacing-base) * 0.1);
+    }
+
+    .theme-toggle {
+      font-size: 0.8em;
+      padding: calc(var(--spacing-base) * 0.2);
+      min-width: 30px;
+    }
+  }
+
+  footer {
+    padding: calc(var(--spacing-base) * 0.25);
+    font-size: 0.75em;
+  }
+
+  main {
+    margin-top: 70px;
+    margin-bottom: 50px;
+  }
+
   .logo {
     height: clamp(2.5em, 18vw, 4em);
   }
@@ -69,4 +228,8 @@
   .card {
     padding: calc(var(--spacing-base) * 0.5);
   }
+}
+
+.themeButton {
+  margin: 0 0.5em;
 }
