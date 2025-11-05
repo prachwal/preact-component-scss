@@ -1,0 +1,10 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs",
+  "name": "Preact Component Library",
+  "includeVersion": true,
+  "readme": "README.md",
+  "exclude": ["**/*.test.*", "**/*.spec.*", "src/test/**"],
+  "plugin": ["typedoc-plugin-markdown"]
+}

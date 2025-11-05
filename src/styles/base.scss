@@ -1,0 +1,76 @@
+// Base styles and CSS custom properties
+@use 'variables' as *;
+@use 'mixins' as *;
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Global element styles
+a {
+  font-weight: $font-weight-link;
+  color: var(--color-link);
+  text-decoration: inherit;
+
+  &:hover {
+    color: var(--color-link-hover);
+  }
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  padding: var(--spacing-base);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: $line-height-h1;
+  margin: $margin-h1;
+}
+
+button {
+  border-radius: $border-radius-button;
+  border: 1px solid transparent;
+  padding: $padding-button;
+  font-size: var(--font-size-base);
+  font-weight: $font-weight-button;
+  font-family: inherit;
+  background-color: var(--color-button-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: $transition-button;
+
+  &:hover {
+    border-color: var(--color-link);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: $outline-focus;
+  }
+}
+
+// Mobile-first responsive adjustments
+@media (max-width: $breakpoint-tablet) {
+  body {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  }
+}

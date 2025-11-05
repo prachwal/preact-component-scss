@@ -1,0 +1,43 @@
+// SCSS Variables
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+
+$border-radius-button: 8px;
+$border-radius-card: 12px;
+$padding-button: 0.6em 1.2em;
+$transition-button: border-color 0.25s;
+$blur-card: 10px;
+$font-weight-link: 500;
+$font-weight-button: 500;
+$line-height-h1: 1.1;
+$margin-h1: 0.5em 0;
+$outline-focus: 4px auto -webkit-focus-ring-color;
+
+:root {
+  // Responsive font scaling
+  --font-size-base: clamp(14px, 2.5vw, 18px);
+  --font-size-h1: clamp(2rem, 8vw, 3.2em);
+  --spacing-base: clamp(1rem, 4vw, 2rem);
+  --logo-size: clamp(4em, 12vw, 6em);
+
+  // Default colors (dark theme)
+  --color-text: rgba(255, 255, 255, 0.87);
+  --color-bg: #242424;
+  --color-link: #646cff;
+  --color-link-hover: #535bf2;
+  --color-button-bg: #1a1a1a;
+  --color-logo-shadow: #646cffaa;
+  --color-preact-shadow: #673ab8aa;
+  --color-card-bg: rgba(255, 255, 255, 0.05);
+  --color-card-border: rgba(255, 255, 255, 0.1);
+  --color-read-docs: #888;
+}
+
+// Light theme overrides
+.theme-light {
+  --color-text: #213547;
+  --color-bg: #ffffff;
+  --color-link-hover: #747bff;
+  --color-button-bg: #cccccc;
+  --color-card-bg: rgba(0, 0, 0, 0.05);
+}

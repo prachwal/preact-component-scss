@@ -1,0 +1,61 @@
+{
+  "name": "preact-component-scss",
+  "version": "0.1.0",
+  "description": "A Preact component library with SCSS styling",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles": "./dist/styles/main.css"
+  },
+  "files": [
+    "dist",
+    "src",
+    "!src/**/*.test.*",
+    "!src/**/*.spec.*"
+  ],
+  "keywords": [
+    "preact",
+    "components",
+    "scss",
+    "typescript",
+    "ui-library"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:lib": "tsc -b && vite build --mode library",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:junit": "vitest run --reporter=junit > test-results.xml",
+    "test:coverage": "vitest run --coverage",
+    "docs": "typedoc --out docs src"
+  },
+  "dependencies": {
+    "@preact/signals": "^2.3.2",
+    "preact": "^10.27.2",
+    "scss": "^0.2.4"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/preact": "^3.2.4",
+    "@types/node": "^24.10.0",
+    "@vitest/coverage-v8": "^4.0.7",
+    "@vitest/ui": "^4.0.7",
+    "jsdom": "^27.1.0",
+    "sass": "^1.93.3",
+    "typedoc": "^0.28.14",
+    "typedoc-plugin-markdown": "^4.9.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.2.0",
+    "vitest": "^4.0.7"
+  }
+}

@@ -1,0 +1,72 @@
+// App component styles
+@use 'variables' as *;
+#app {
+  max-width: min(1280px, 90vw);
+  margin: 0 auto;
+  padding: var(--spacing-base);
+  text-align: center;
+}
+
+// Logo styles
+.logo {
+  height: var(--logo-size);
+  padding: calc(var(--spacing-base) * 0.75);
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em var(--color-logo-shadow));
+  }
+
+  &.preact:hover {
+    filter: drop-shadow(0 0 2em var(--color-preact-shadow));
+  }
+}
+
+// Card component styles
+.card {
+  padding: var(--spacing-base);
+  margin: var(--spacing-base) 0;
+  border-radius: $border-radius-card;
+  background: var(--color-card-bg);
+  backdrop-filter: blur($blur-card);
+  border: 1px solid var(--color-card-border);
+}
+
+// Read the docs text
+.read-the-docs {
+  color: var(--color-read-docs);
+  font-size: 0.9em;
+  margin-top: var(--spacing-base);
+}
+
+// Responsive layout adjustments
+@media (max-width: $breakpoint-tablet) {
+  #app {
+    padding: calc(var(--spacing-base) * 0.5);
+  }
+
+  .logo {
+    height: clamp(3em, 15vw, 5em);
+    padding: calc(var(--spacing-base) * 0.5);
+  }
+
+  .card {
+    padding: calc(var(--spacing-base) * 0.75);
+    margin: calc(var(--spacing-base) * 0.75) 0;
+  }
+
+  .read-the-docs {
+    font-size: 0.8em;
+    padding: 0 calc(var(--spacing-base) * 0.5);
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .logo {
+    height: clamp(2.5em, 18vw, 4em);
+  }
+
+  .card {
+    padding: calc(var(--spacing-base) * 0.5);
+  }
+}
