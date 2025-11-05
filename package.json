@@ -1,6 +1,6 @@
 {
   "name": "preact-component-scss",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Preact component library with SCSS styling",
   "author": "Prachwal",
   "repository": {
@@ -10,15 +10,15 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/index-0.1.0.js",
+  "module": "./dist/index-0.1.0.js",
   "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index-0.1.0.js"
     },
-    "./styles": "./dist/styles/main.css"
+    "./styles": "./dist/index-0.1.0.css"
   },
   "files": [
     "dist",

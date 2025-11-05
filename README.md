@@ -79,7 +79,7 @@ npm run docs
 
 ## Project Structure
 
-```
+```text
 src/
 ├── app.tsx              # Main demo component
 ├── index.ts             # Library entry point
