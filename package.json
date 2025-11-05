@@ -2,13 +2,20 @@
   "name": "preact-component-scss",
   "version": "0.1.0",
   "description": "A Preact component library with SCSS styling",
+  "author": "Prachwal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prachwal/preact-component-scss.git"
+  },
+  "license": "MIT",
   "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.js",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/index.js"
     },
     "./styles": "./dist/styles/main.css"
@@ -29,14 +36,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:lib": "tsc -b && vite build --mode library",
+    "build:lib": "vite build --mode library && npm run build:types",
+    "build:types": "tsc --project tsconfig.types.json --emitDeclarationOnly --outDir dist/types",
     "preview": "vite preview",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "test:junit": "vitest run --reporter=junit > test-results.xml",
     "test:coverage": "vitest run --coverage",
-    "docs": "typedoc --out docs src"
+    "docs": "typedoc --out docs src",
+    "prepublishOnly": "npm run build:lib"
   },
   "dependencies": {
     "@preact/signals": "^2.3.2",
