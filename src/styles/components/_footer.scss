@@ -1,4 +1,4 @@
-// Footer component styles - Mobile-first
+// Footer component styles
 @use '../variables' as *;
 
 footer {
@@ -9,44 +9,18 @@ footer {
   height: var(--footer-height);
   background-color: var(--color-bg);
   border-top: 1px solid var(--color-card-border);
-  z-index: $z-index-footer;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: max(calc(var(--spacing-base) * 0.2), 0.3rem); // Reduced padding for more compact footer
+  z-index: 100;
+  backdrop-filter: blur(8px);
 
   p {
-    margin: 0;
-    padding: 0 calc(var(--spacing-base) * 0.5); // Minimal padding for mobile
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(0.65rem, 2vw, 0.75rem); // Smaller base for mobile
+    padding: 0 var(--spacing-base);
+    font-size: var(--font-size-sm);
     color: var(--color-text-muted);
     text-align: center;
-    line-height: 1.4;
+    line-height: var(--line-height-base);
   }
-}
-
-// Add padding to body to account for fixed footer
-body {
-  padding-bottom: var(--footer-height);
-}
-
-// Mobile-first progressive enhancements for footer
-@media (min-width: $breakpoint-tablet) {
-  // Tablet optimizations (768px+)
-  footer {
-    padding: calc(var(--spacing-base) * 0.5);
-
-    p {
-      padding: 0 var(--spacing-base);
-      font-size: var(--font-size-sm);
-    }
-  }
-}
-
-@media (min-width: $breakpoint-desktop) {
-  // Desktop enhancements (1024px+)
-  // Additional desktop-specific footer styles can be added here
 }

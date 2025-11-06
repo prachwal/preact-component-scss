@@ -2,6 +2,13 @@
 @use 'variables' as *;
 @use 'mixins' as *;
 
+// Global reset
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 // Global element styles
 a {
   font-weight: $font-weight-link;
@@ -15,124 +22,81 @@ a {
 
 body {
   margin: 0;
-  display: block; // Changed from flex to block to remove vertical centering
-  min-width: 320px;
   min-height: 100vh;
-  padding: 0.5rem; // Minimal padding for mobile
+  padding-bottom: var(--footer-height);
 }
 
 #app {
-  max-width: min(1280px, 90vw);
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 1rem 1rem; // Only horizontal padding, removed top padding
-  text-align: center;
+  padding: 0 var(--spacing-base);
 }
 
-// Logo styles - mobile optimized
+main {
+  padding: var(--spacing-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+main {
+  padding: var(--spacing-xl) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+// Logo styles
 .logo {
-  height: clamp(2.5em, 18vw, 4em); // Start small for mobile
-  padding: calc(var(--spacing-base) * 0.5); // Minimal padding for mobile
-  transition: filter 0.3s ease;
+  height: 2.5rem;
+  width: auto;
+  transition: transform var(--transition-base), filter var(--transition-base);
 
   &:hover {
-    filter: drop-shadow(0 0 2em var(--color-logo-shadow));
+    transform: scale(1.05);
   }
 
   &.preact:hover {
-    filter: drop-shadow(0 0 2em var(--color-preact-shadow));
+    filter: drop-shadow(0 0 1.5rem var(--color-preact-shadow));
+  }
+
+  &:not(.preact):hover {
+    filter: drop-shadow(0 0 1.5rem var(--color-logo-shadow));
   }
 }
 
 h1 {
-  font-size: clamp(1.5rem, 8vw, 2rem); // Smaller base for mobile
-  line-height: $line-height-h1;
-  margin: $margin-h1;
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text);
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-base); // Smaller gap for mobile
-  margin-top: 1rem; // Add top margin instead of relying on body padding
-  margin-bottom: 1rem; // Add bottom margin
-}
-
-section.card {
-  // Removed padding - now handled by .card class only
-  border-radius: var(--border-radius-lg);
-  background-color: var(--color-card-bg);
-  border: 1px solid var(--color-card-border);
-  box-shadow: var(--shadow-lg);
-}
-
-// Card component styles - mobile optimized
-.card {
-  padding: var(--spacing-sm); // Simplified padding without calc multiplier
-  margin: 0; // Removed margin - gap now handled by parent containers
-  border-radius: $border-radius-card;
-  background: var(--color-card-bg);
-  backdrop-filter: blur($blur-card);
-  border: 1px solid var(--color-card-border);
-}
-
-// Read the docs text - mobile optimized
+// Read the docs text
 .read-the-docs {
-  color: var(--color-read-docs);
-  font-size: clamp(0.7rem, 2vw, 0.8rem); // Smaller base for mobile
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
   margin-top: var(--spacing-base);
-  padding: 0 var(--spacing-xs); // Simplified horizontal padding
 }
 
-// Mobile-first progressive enhancements
-@media (min-width: $breakpoint-mobile) {
-  // Enhanced mobile experience (480px+)
-  body {
-    padding: 0 1rem var(--footer-height) 1rem; // Only horizontal padding, keep bottom for footer
-  }
-
-  #app {
-    padding: 0 clamp(1rem, 4vw, 2rem) 1rem; // Only horizontal padding, keep bottom
-  }
-
-  main {
-    margin-top: var(--spacing-sm); // Smaller top margin on larger screens
-    margin-bottom: var(--spacing-sm);
-  }
-
-  .logo {
-    height: clamp(3em, 15vw, 5em);
-    padding: calc(var(--spacing-base) * 0.75);
-  }
-
-  .card {
-    padding: calc(var(--spacing-base) * 0.75);
-    margin: calc(var(--spacing-base) * 0.75) 0;
-  }
-
-  .read-the-docs {
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
-    padding: 0 var(--spacing-sm); // Simplified horizontal padding
-  }
-}
-
+// Media queries
 @media (min-width: $breakpoint-tablet) {
-  // Tablet optimizations (768px+)
   main {
     gap: var(--spacing-lg);
-  }
-
-  .card {
-    padding: var(--spacing-base); // Simplified padding
-    // Removed margin - gap handled by parent
-  }
-
-  h1 {
-    font-size: var(--font-size-h1);
   }
 }
 
 @media (min-width: $breakpoint-desktop) {
-  // Desktop enhancements (1024px+)
-  // Additional desktop-specific styles can be added here
+  main {
+    padding: 3rem 0;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .logo {
+    height: 2rem;
+  }
+
+  h1 {
+    font-size: var(--font-size-lg);
+  }
 }

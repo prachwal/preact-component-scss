@@ -1,10 +1,28 @@
-import { GridDemo, FlexTilesDemo } from '../index';
+import { GridDemo, FlexTilesDemo, Card, Button } from '../index';
 
 export function Main() {
   return (
     <main>
       <GridDemo />
       <FlexTilesDemo />
+
+      <section class="demo-section">
+        <h2>Card Padding Options</h2>
+        <p>Demonstrating the optional <code>noPadding</code> prop</p>
+        <div class="demo-grid demo-grid--2col">
+          <Card title="Default Card (with padding)">
+            <p>This card has the default padding applied to header and content.</p>
+            <Button size="small" variant="primary">Default Action</Button>
+          </Card>
+
+          <Card title="No Padding Card" noPadding>
+            <div style="padding: var(--spacing-base);">
+              <p>This card has no default padding. The developer controls all spacing.</p>
+              <Button size="small" variant="secondary">Custom Action</Button>
+            </div>
+          </Card>
+        </div>
+      </section>
 
       <section class="demo-section">
         <h2>Component Library Info</h2>
