@@ -26,17 +26,17 @@ export function FlexTilesDemo() {
     },
     {
       title: 'Theme Support',
-      content: 'Built-in dark/light theme support with automatic system preference detection.',
+      content: 'Dark/light theme support with automatic system preference detection.',
       icon: '🌙',
       variant: 'default' as const,
-      size: 'small' as const
+      size: 'medium' as const // Changed from small to medium for longer content
     },
     {
       title: 'TypeScript',
-      content: 'Full TypeScript support with comprehensive type definitions and JSDoc comments.',
+      content: 'Full TypeScript support with comprehensive type definitions.',
       icon: '📝',
       variant: 'elevated' as const,
-      size: 'small' as const
+      size: 'medium' as const // Changed from small to medium for longer content
     },
     {
       title: 'Performance',

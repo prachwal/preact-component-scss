@@ -11,12 +11,12 @@
 
   // Tablet: 3 columns
   @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   // Desktop: 6 columns
   @media (min-width: 1024px) {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
