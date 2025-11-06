@@ -1,0 +1,54 @@
+// ===== DEMO GRID STYLES =====
+@use '../variables' as *;
+
+// Responsive grid layout
+.demo-grid {
+  display: grid;
+  gap: var(--spacing-base);
+  grid-template-columns: 1fr;
+
+  @media (min-width: $breakpoint-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  // 2-column variant
+  &--2col {
+    @media (min-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+
+// Flex tiles demo
+.demo-flex-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-base);
+
+  .demo-tile {
+    flex: 1 1 280px;
+    min-width: 260px;
+    max-width: 400px;
+  }
+}
+
+// Demo section styling
+.demo-section {
+  h2 {
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    margin-bottom: var(--spacing-base);
+    color: var(--color-text);
+  }
+
+  p {
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-base);
+  }
+}

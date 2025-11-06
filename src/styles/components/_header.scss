@@ -1,116 +1,52 @@
-// Header component styles - Mobile-first
+// Header component styles
 @use '../variables' as *;
 
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   height: var(--header-height);
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-card-border);
-  z-index: $z-index-header;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  padding: calc(var(--spacing-base) * 0.3); // Minimal padding for mobile
+  z-index: 100;
+  backdrop-filter: blur(8px);
 
   .header-content {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 calc(var(--spacing-base) * 0.5); // Minimal padding for mobile
+    padding: 0 var(--spacing-base);
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center; // Center on mobile
-    gap: calc(var(--spacing-base) * 0.2); // Smaller gap for mobile
+    justify-content: space-between;
+    gap: var(--spacing-base);
   }
 
   .logos {
     display: flex;
     align-items: center;
-    gap: calc(var(--spacing-base) * 0.2); // Smaller gap for mobile
-
-    .logo {
-      height: clamp(1.8em, 12vw, 2.5em); // Smaller base for mobile
-      width: auto;
-      transition: transform var(--transition-base);
-
-      &:hover {
-        transform: scale(1.05);
-      }
-
-      &.preact {
-        filter: drop-shadow(0 0 2em var(--color-preact-shadow));
-      }
-
-      &:not(.preact) {
-        filter: drop-shadow(0 0 2em var(--color-logo-shadow));
-      }
-    }
+    gap: var(--spacing-sm);
   }
 
   h1 {
-    margin: 0;
-    font-size: clamp(1.25rem, 5vw, 1.75rem); // Better scaling for header title
+    font-size: var(--font-size-xl);
     font-weight: 600;
     color: var(--color-text);
-    text-align: center;
-    flex: 1;
-  }
-
-  .theme-toggle {
-    margin-left: auto;
   }
 }
 
-// Add padding to body to account for fixed header
-body {
-  padding-top: var(--header-height);
-}
-
-// Mobile-first progressive enhancements for header
-@media (min-width: $breakpoint-mobile) {
-  // Enhanced mobile (480px+)
-  header {
-    padding: calc(var(--spacing-base) * 0.4);
-
-    .header-content {
-      padding: 0 var(--spacing-base);
-      justify-content: space-between;
-      gap: var(--spacing-base);
-    }
-
-    .logos .logo {
-      height: clamp(2.2em, 10vw, 3em);
-      padding: calc(var(--spacing-base) * 0.15);
-    }
-  }
-}
-
-@media (min-width: $breakpoint-tablet) {
-  // Tablet optimizations (768px+)
+// Media queries
+@media (max-width: $breakpoint-mobile) {
   header {
     .header-content {
-      gap: calc(var(--spacing-base) * 0.3);
+      padding: 0 var(--spacing-sm);
     }
 
     h1 {
-      font-size: clamp(1.5rem, 4vw, 2rem); // Larger for tablet+
+      font-size: var(--font-size-lg);
     }
 
-    .theme-toggle {
-      font-size: clamp(0.8rem, 2vw, 0.9rem);
-      padding: calc(var(--spacing-base) * 0.25);
-      min-width: clamp(30px, 8vw, 35px);
-    }
-
-    .logos .logo {
-      height: clamp(2em, 6vw, 2.5em);
+    .logo {
+      height: 2rem;
     }
   }
-}
-
-@media (min-width: $breakpoint-desktop) {
-  // Desktop enhancements (1024px+)
-  // Additional desktop-specific header styles can be added here
 }

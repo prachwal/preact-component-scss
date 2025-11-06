@@ -4,9 +4,6 @@ import './styles/main.scss'
 // ===== Core App =====
 export { App } from './app'
 
-// ===== Utilities =====
-export { formatCount, isEven } from './utils'
-
 // ===== Components =====
 export * from './components'
 

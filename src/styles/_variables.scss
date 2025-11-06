@@ -40,32 +40,31 @@ $z-index-tooltip: 1100;
   -moz-osx-font-smoothing: grayscale;
 
   // ===== Spacing & Layout =====
-  --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
-  --spacing-sm: clamp(0.5rem, 2vw, 1rem);
-  --spacing-base: clamp(1rem, 4vw, 2rem);
-  --spacing-lg: clamp(1.5rem, 6vw, 3rem);
-  --spacing-xl: clamp(2rem, 8vw, 4rem);
+  --spacing-xs: 0.375rem;
+  --spacing-sm: 0.75rem;
+  --spacing-base: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
 
   // ===== Typography =====
-  --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
-  --font-size-sm: clamp(0.875rem, 2.25vw, 1rem);
-  --font-size-base: clamp(1rem, 2.5vw, 1.125rem);
-  --font-size-lg: clamp(1.125rem, 3vw, 1.25rem);
-  --font-size-xl: clamp(1.25rem, 3.5vw, 1.5rem);
-  --font-size-h1: clamp(2rem, 8vw, 3.2em);
-  --font-size-h2: clamp(1.5rem, 6vw, 2.5em);
-  --font-size-h3: clamp(1.25rem, 5vw, 2em);
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
 
-  --line-height-tight: 1.2;
+  --line-height-tight: 1.25;
   --line-height-base: 1.5;
   --line-height-relaxed: 1.75;
 
   // ===== Border Radius =====
-  --border-radius-xs: clamp(1px, 0.5vw, 2px);
-  --border-radius-sm: clamp(2px, 1vw, 4px);
-  --border-radius-base: clamp(4px, 2vw, 8px);
-  --border-radius-lg: clamp(6px, 3vw, 12px);
-  --border-radius-xl: clamp(8px, 4vw, 16px);
+  --border-radius-sm: 0.375rem;
+  --border-radius-base: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
   --border-radius-full: 9999px;
 
   // ===== Transitions =====
@@ -74,66 +73,50 @@ $z-index-tooltip: 1100;
   --transition-slow: 350ms ease;
 
   // ===== Sizes =====
-  --logo-size: clamp(4em, 12vw, 6em);
-  --header-height: clamp(60px, 10vh, 80px);
-  --footer-height: clamp(50px, 8vh, 70px);
+  --header-height: 64px;
+  --footer-height: 56px;
 
   // ===== Colors - Dark Theme (default) =====
   --color-text: rgba(255, 255, 255, 0.87);
   --color-text-muted: rgba(255, 255, 255, 0.6);
-  --color-bg: #242424;
-  --color-bg-elevated: #2a2a2a;
-  
-  --color-link: #0056b3; // WCAG AA compliant dark blue
-  --color-link-hover: #003d82; // Darker blue for hover
-  
-  --color-button-bg: #1a1a1a;
-  
+  --color-bg: #1a1a1a;
+  --color-bg-elevated: #242424;
+
+  --color-link: #646cff;
+  --color-link-hover: #535bf2;
+
+  --color-button-bg: #2a2a2a;
+
   --color-logo-shadow: #646cffaa;
   --color-preact-shadow: #673ab8aa;
-  
-  --color-card-bg: rgba(255, 255, 255, 0.05);
-  --color-card-border: rgba(255, 255, 255, 0.1);
-  
+
+  --color-card-bg: rgba(255, 255, 255, 0.03);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+
   --color-read-docs: #888;
-  
+
   --color-foreground: rgba(255, 255, 255, 0.87);
 
   // ===== Button Colors =====
   --color-primary: #646cff;
   --color-primary-hover: #535bf2;
-  --color-primary-active: #4248d4;
   --color-primary-foreground: #ffffff;
 
   --color-secondary: #374151;
   --color-secondary-hover: #4b5563;
-  --color-secondary-active: #374151;
   --color-secondary-foreground: #f9fafb;
-  --color-secondary-border: #4b5563;
-  --color-secondary-border-hover: #6b7280;
 
+  --color-ghost: transparent;
   --color-ghost-hover: rgba(255, 255, 255, 0.05);
-  --color-ghost-active: rgba(255, 255, 255, 0.1);
-  --color-ghost-border-hover: rgba(255, 255, 255, 0.1);
 
-  --color-danger: #dc2626;
-  --color-danger-hover: #b91c1c;
-  --color-danger-active: #991b1b;
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
   --color-danger-foreground: #ffffff;
-
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-info: #3b82f6;
-
-  // ===== Focus & States =====
-  --color-focus: #646cff;
-  --color-focus-ring: rgba(100, 108, 255, 0.4);
 
   // ===== Shadows =====
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-base: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
 }
 
 // ===== Light Theme Overrides =====
@@ -142,41 +125,39 @@ $z-index-tooltip: 1100;
   --color-text-muted: #64748b;
   --color-bg: #ffffff;
   --color-bg-elevated: #f9fafb;
-  
-  --color-link: #0056b3; // Same accessible blue for consistency
-  --color-link-hover: #003d82; // Darker hover for light theme
-  
+
+  --color-link: #646cff;
+  --color-link-hover: #535bf2;
+
   --color-button-bg: #f3f4f6;
-  
+
   --color-card-bg: rgba(0, 0, 0, 0.02);
   --color-card-border: rgba(0, 0, 0, 0.08);
-  
+
   --color-foreground: #213547;
 
   // Button overrides for light theme
   --color-secondary: #f3f4f6;
   --color-secondary-hover: #e5e7eb;
-  --color-secondary-active: #d1d5db;
   --color-secondary-foreground: #111827;
-  --color-secondary-border: #d1d5db;
-  --color-secondary-border-hover: #9ca3af;
 
   --color-ghost-hover: rgba(0, 0, 0, 0.05);
-  --color-ghost-active: rgba(0, 0, 0, 0.1);
-  --color-ghost-border-hover: rgba(0, 0, 0, 0.1);
+
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-foreground: #ffffff;
 
   // Shadows dla light theme
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.25);
+  --shadow-base: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 // ===== Dark Theme Explicit =====
-.theme-dark {
-  // Możesz dodać specyficzne overrides dla dark theme
-  // jeśli różnią się od defaultowych wartości w :root
-}
+// .theme-dark {
+//   // Możesz dodać specyficzne overrides dla dark theme
+//   // jeśli różnią się od defaultowych wartości w :root
+// }
 
 // ===== Accessibility =====
 @media (prefers-reduced-motion: reduce) {

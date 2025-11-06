@@ -1,5 +1,6 @@
-import type { ComponentChildren, JSX } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { forwardRef } from 'preact/compat';
+import type { BaseButtonProps } from '../types';
 
 // Eksportowane typy
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -7,7 +8,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
 // Pełny interfejs z prawidłowymi typami
-export interface ButtonProps extends Omit<JSX.HTMLAttributes<HTMLButtonElement>, 'size' | 'loading' | 'icon'> {
+export interface ButtonProps extends BaseButtonProps {
   /** Button size variant @default 'medium' */
   size?: ButtonSize;
   

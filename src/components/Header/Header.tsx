@@ -4,12 +4,13 @@ import viteLogo from '/vite.svg';
 import { useTheme } from '../../theme-provider';
 import { Button } from '../Button';
 import type { ComponentType } from 'preact';
+import { ICONS } from '../../constants/icons';
 
 // Typy dla ikon motywów
 const THEME_ICONS = {
-  dark: '🌙',
-  light: '☀️',
-  auto: '🌓',
+  dark: ICONS.moon,
+  light: ICONS.sun,
+  auto: ICONS.auto,
 } as const;
 
 const THEME_LABELS = {
@@ -111,6 +112,12 @@ export const Header: HeaderComponent = memo(() => {
           onKeyDown={handleKeyDown}
           title={`${themeLabel} (Ctrl+T to toggle)`}
           aria-label={`Switch theme. Current: ${themeLabel}`}
+          role="switch"
+          aria-checked={
+            theme.value === 'auto' 
+              ? 'mixed' 
+              : theme.value === 'light' ? 'true' : 'false'
+          }
           icon={themeIcon}
         />
       </div>
