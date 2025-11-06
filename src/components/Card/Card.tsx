@@ -57,19 +57,21 @@ export const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     `card--${size}`,
     `card--${variant}`,
     noPadding && 'card--no-padding',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
-  const headerClasses = [
-    'card__header',
-    headerSize && `card__header--${headerSize}`
-  ].filter(Boolean).join(' ');
+  const headerClasses = ['card__header', headerSize && `card__header--${headerSize}`]
+    .filter(Boolean)
+    .join(' ');
 
   const renderCard = () => {
     const commonProps = {
-      ref: ref as any,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ref: ref as any, // Polymorphic component - ref can be HTMLElement, HTMLDivElement, etc.
       class: cardClasses,
-      ...restProps
+      ...restProps,
     };
 
     const content = (
@@ -80,17 +82,13 @@ export const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
               header
             ) : (
               <>
-                {icon && <div class="card__icon">{icon}</div>}
-                {title && <h3 class="card__title">{title}</h3>}
+                {icon && <div class='card__icon'>{icon}</div>}
+                {title && <h3 class='card__title'>{title}</h3>}
               </>
             )}
           </header>
         )}
-        {children && (
-          <div class="card__content">
-            {children}
-          </div>
-        )}
+        {children && <div class='card__content'>{children}</div>}
       </>
     );
 

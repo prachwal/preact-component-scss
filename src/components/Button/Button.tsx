@@ -11,57 +11,57 @@ export type ButtonType = 'button' | 'submit' | 'reset';
 export interface ButtonProps extends BaseButtonProps {
   /** Button size variant @default 'medium' */
   size?: ButtonSize;
-  
+
   /** Button style variant @default 'primary' */
   variant?: ButtonVariant;
-  
+
   /** Loading state - shows spinner and disables button @default false */
   loading?: boolean;
-  
+
   /** Icon to display before text */
   icon?: ComponentChildren;
-  
+
   /** Icon to display after text */
   iconEnd?: ComponentChildren;
-  
+
   /** Full width button @default false */
   fullWidth?: boolean;
-  
+
   /** Children content */
   children?: ComponentChildren;
-  
+
   /** Button type attribute @default 'button' */
   type?: ButtonType;
-  
+
   /** Disabled state */
   disabled?: boolean;
-  
+
   /** Click handler with proper typing */
   onClick?: (event: MouseEvent) => void;
-  
+
   /** CSS class name */
   className?: string;
-  
+
   /** Accessible label for screen readers */
   'aria-label'?: string;
-  
+
   /** Accessible description */
   'aria-describedby'?: string;
 }
 
 /**
  * Universal Button component with multiple variants and sizes.
- * 
+ *
  * @example
  * ```tsx
  * // Primary button
  * <Button variant="primary" onClick={() => console.log('clicked')}>
  *   Click me
  * </Button>
- * 
+ *
  * // Loading button
  * <Button loading>Processing...</Button>
- * 
+ *
  * // Button with icon
  * <Button icon={<IconCheck />}>Save</Button>
  * ```
@@ -92,8 +92,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
     fullWidth && 'button--full-width',
     loading && 'button--loading',
     disabled && 'button--disabled',
-    className
-  ].filter(Boolean).join(' ');
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   // Obsługa kliknięcia z walidacją
   const handleClick = (event: MouseEvent) => {
@@ -120,18 +122,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
       {...restProps}
     >
       {loading && (
-        <span className="button__spinner" role="status" aria-label="Loading">
-          <span className="sr-only">Loading...</span>
+        <span className='button__spinner' role='status' aria-label='Loading'>
+          <span className='sr-only'>Loading...</span>
         </span>
       )}
       {icon && !loading && (
-        <span className="button__icon button__icon--start" aria-hidden="true">
+        <span className='button__icon button__icon--start' aria-hidden='true'>
           {icon}
         </span>
       )}
-      {children && <span className="button__content">{children}</span>}
+      {children && <span className='button__content'>{children}</span>}
       {iconEnd && !loading && (
-        <span className="button__icon button__icon--end" aria-hidden="true">
+        <span className='button__icon button__icon--end' aria-hidden='true'>
           {iconEnd}
         </span>
       )}
@@ -147,5 +149,7 @@ export const isValidButtonSize = (size: unknown): size is ButtonSize => {
 };
 
 export const isValidButtonVariant = (variant: unknown): variant is ButtonVariant => {
-  return typeof variant === 'string' && ['primary', 'secondary', 'ghost', 'danger'].includes(variant);
+  return (
+    typeof variant === 'string' && ['primary', 'secondary', 'ghost', 'danger'].includes(variant)
+  );
 };

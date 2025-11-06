@@ -1,6 +1,6 @@
 {
   "name": "preact-component-scss",
-  "version": "0.1.4",
+  "version": "2.0.0",
   "description": "A Preact component library with SCSS styling",
   "author": "Prachwal",
   "repository": {
@@ -8,8 +8,9 @@
     "url": "git+https://github.com/prachwal/preact-component-scss.git"
   },
   "license": "MIT",
+  "type": "module",
   "bin": {
-    "pack-unpack": "./scripts/pack-unpack.js"
+    "pack-unpack": "./scripts/pack-unpack.cjs"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -45,8 +46,12 @@
     "test:junit": "vitest run --reporter=junit > test-results.xml",
     "test:coverage": "vitest run --coverage",
     "docs": "typedoc --out docs src",
-    "pack": "node scripts/pack-unpack.js pack src/ src.packed.txt",
-    "unpack": "node scripts/pack-unpack.js unpack src.packed.txt src-unpacked/",
+    "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint:fix": "eslint src --ext .ts,.tsx,.js,.jsx --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,scss,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,scss,css,md}\"",
+    "pack": "node scripts/pack-unpack.cjs pack src/ src.packed.txt",
+    "unpack": "node scripts/pack-unpack.cjs unpack src.packed.txt src-unpacked/",
     "clean:dist": "find src -name \"dist\" -type d -exec rm -rf {} + 2>/dev/null || true",
     "version-check": "node -e \"const { execSync } = require('child_process'); const fs = require('fs'); let pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8')); try { const published = execSync('npm view ' + pkg.name + ' version', { encoding: 'utf8' }).trim(); if (published === pkg.version) { console.log('Version ' + pkg.version + ' is already published. Bumping patch version...'); execSync('npm version patch --no-git-tag-version', { stdio: 'inherit' }); pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8')); console.log('Version bumped to: ' + pkg.version); } else { console.log('Local version (' + pkg.version + ') differs from published (' + published + '). No action needed.'); } } catch (e) { console.log('Package not found on npm or network error. This might be the first publish.'); }\"",
     "prepublishOnly": "npm run build:lib"
@@ -61,10 +66,15 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/preact": "^3.2.4",
     "@types/node": "^24.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
     "@vitest/coverage-v8": "^4.0.7",
     "@vitest/ui": "^4.0.7",
     "cssnano": "^7.1.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-preact": "^0.1.0",
     "jsdom": "^27.1.0",
+    "prettier": "^3.6.2",
     "sass": "^1.93.3",
     "typedoc": "^0.28.14",
     "typedoc-plugin-markdown": "^4.9.0",

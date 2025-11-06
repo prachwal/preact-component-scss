@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+coverage/
+docs/
+
+# Generated files
+test-results.xml
+src.packed.txt
+
+# Logs
+*.log
+
+# Package files
+package-lock.json
+
+# IDE files
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db

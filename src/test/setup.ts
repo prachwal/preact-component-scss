@@ -1,9 +1,9 @@
-import { expect, afterEach, vi } from 'vitest'
-import { cleanup } from '@testing-library/preact'
-import * as matchers from '@testing-library/jest-dom/matchers'
+import { expect, afterEach, vi } from 'vitest';
+import { cleanup } from '@testing-library/preact';
+import * as matchers from '@testing-library/jest-dom/matchers';
 
 // Extend expect with jest-dom matchers
-expect.extend(matchers)
+expect.extend(matchers);
 
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -18,9 +18,9 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: vi.fn(),
     dispatchEvent: vi.fn(),
   })),
-})
+});
 
 // Cleanup after each test
 afterEach(() => {
-  cleanup()
-})
+  cleanup();
+});

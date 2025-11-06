@@ -1,5 +1,5 @@
-import { Card } from '../Card';
-import { Button } from '../Button';
+import { Card } from '../../components/Card';
+import { Button } from '../../components/Button';
 
 export function GridDemo() {
   const cards = [
@@ -18,19 +18,14 @@ export function GridDemo() {
   ];
 
   return (
-    <section class="demo-section">
+    <section class='demo-section'>
       <h2>Responsive Grid Demo</h2>
       <p>6 columns on desktop, 3 on tablet, 1 on mobile</p>
-      <div class="demo-grid">
+      <div class='demo-grid'>
         {cards.map((card, index) => (
-          <Card
-            key={index}
-            title={card.title}
-            variant={card.variant}
-            size="small"
-          >
+          <Card key={index} title={card.title} variant={card.variant} size='small'>
             <p>{card.content}</p>
-            <Button size="small" variant="primary">
+            <Button size='small' variant='primary'>
               Action {index + 1}
             </Button>
           </Card>

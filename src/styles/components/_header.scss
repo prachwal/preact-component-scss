@@ -1,13 +1,13 @@
 // Header component styles
-@use '../variables' as *;
+@use "../variables" as *;
 
-header {
+header[role="banner"] {
   position: sticky;
   top: 0;
   height: var(--header-height);
   background-color: var(--color-bg);
   border-bottom: 1px solid var(--color-card-border);
-  z-index: 100;
+  z-index: 1000;
   backdrop-filter: blur(8px);
 
   .header-content {
@@ -36,7 +36,7 @@ header {
 
 // Media queries
 @media (max-width: $breakpoint-mobile) {
-  header {
+  header[role="banner"] {
     .header-content {
       padding: 0 var(--spacing-sm);
     }
