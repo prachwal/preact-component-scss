@@ -28,18 +28,24 @@ setTheme('auto'); // Follows system preference
 - **Class Application**: `<html class="theme-dark">` or `<html class="theme-light">`
 
 ## Styling Architecture
-**Modern SCSS with separation of concerns**:
+**Optimized SCSS with performance-first approach**:
 
 - **SCSS Variables** (`_variables.scss`): Static values only (breakpoints, z-index, border-radius)
-- **CSS Custom Properties**: Dynamic theme values with `clamp()` for responsive scaling
+- **CSS Custom Properties**: Dynamic theme values with fixed spacing and typography for better performance
 - **Component SCSS**: Dedicated files in `src/styles/components/_[component].scss`
 - **Import Chain**: `main.scss` → `components/index.scss` → individual component files
 
-**Responsive Patterns**:
+**Performance-First Patterns**:
 ```scss
-// Fluid scaling with clamp()
---font-size-base: clamp(1rem, 2.5vw, 1.125rem);
---spacing-base: clamp(1rem, 4vw, 2rem);
+// Fixed values for better performance (no runtime calculations)
+--spacing-xs: 0.375rem;
+--spacing-sm: 0.75rem;
+--spacing-base: 1rem;
+--spacing-lg: 1.5rem;
+--spacing-xl: 2rem;
+
+--font-size-base: 1rem;
+--font-size-lg: 1.125rem;
 
 // Breakpoint usage
 @media (max-width: $breakpoint-tablet) { /* 768px */ }
@@ -77,7 +83,9 @@ npm run docs         # TypeDoc generation
 **CSS Optimization**:
 - **Production builds** automatically minify CSS with cssnano
 - **Comments removed**, whitespace normalized, fonts optimized
-- **12.78 kB → 2.98 kB gzipped** typical reduction
+- **Performance-first**: Fixed values instead of runtime calculations
+- **Reduced CSS custom properties** for better performance
+- **8.65 kB → 2.16 kB gzipped** typical reduction
 
 ## Key Files & Patterns
 
@@ -172,7 +180,7 @@ npm publish           # Publish to npm (requires NPM_TOKEN)
 
 **Styling Conventions**:
 - Use CSS custom properties for theme values
-- `clamp()` for responsive scaling (no fixed breakpoints)
+- Fixed spacing values for better performance (no clamp() calculations)
 - BEM-like naming: `.button--primary`, `.button__icon`
 - Component-specific styles in dedicated files
 - **Single :root block** in `_variables.scss` (no duplicates)

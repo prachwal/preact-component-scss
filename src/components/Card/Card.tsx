@@ -17,6 +17,9 @@ export interface CardProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'size' 
   /** HTML tag to use for the card container @default 'section' */
   as?: CardTag;
 
+  /** Disable default padding for custom layouts @default false */
+  noPadding?: boolean;
+
   /** Card title/header text */
   title?: string;
 
@@ -38,6 +41,7 @@ export const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     size = 'medium',
     variant = 'default',
     as: Tag = 'section',
+    noPadding = false,
     title,
     headerSize,
     icon,
@@ -51,6 +55,7 @@ export const Card = forwardRef<HTMLElement, CardProps>((props, ref) => {
     'card',
     `card--${size}`,
     `card--${variant}`,
+    noPadding && 'card--no-padding',
     className
   ].filter(Boolean).join(' ');
 

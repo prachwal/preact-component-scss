@@ -45,7 +45,7 @@ function getAllFiles(dirPath, baseDir = dirPath) {
 }
 
 /**
- * Pack directory into single file
+ * Pack directory into single text file with separators
  */
 function packDirectory(sourceDir, outputFile) {
   console.log(`📦 Packing directory: ${sourceDir}`);
@@ -55,13 +55,21 @@ function packDirectory(sourceDir, outputFile) {
   }
 
   const files = getAllFiles(sourceDir);
-  const packedData = {
-    version: '1.0.0',
-    timestamp: new Date().toISOString(),
-    files
-  };
+  let packedContent = `// ===== PACKED FILES v2.0.0 =====\n`;
+  packedContent += `// Timestamp: ${new Date().toISOString()}\n`;
+  packedContent += `// Total files: ${files.length}\n\n`;
 
-  fs.writeFileSync(outputFile, JSON.stringify(packedData, null, 2));
+  for (const file of files) {
+    packedContent += `// ===== FILE: ${file.path} =====\n`;
+    if (file.isBinary) {
+      packedContent += `[BASE64_BINARY]\n${file.content}\n`;
+    } else {
+      packedContent += `${file.content}\n`;
+    }
+    packedContent += `// ===== END_FILE: ${file.path} =====\n\n`;
+  }
+
+  fs.writeFileSync(outputFile, packedContent, 'utf-8');
   console.log(`✅ Packed ${files.length} files into: ${outputFile}`);
 }
 
@@ -71,16 +79,68 @@ function packDirectory(sourceDir, outputFile) {
 function unpackFile(inputFile, outputDir) {
   console.log(`📦 Unpacking file: ${inputFile}`);
 
-  const packedData = JSON.parse(fs.readFileSync(inputFile, 'utf-8'));
+  const packedContent = fs.readFileSync(inputFile, 'utf-8');
+  const lines = packedContent.split('\n');
 
-  if (packedData.version !== '1.0.0') {
-    console.warn(`⚠️  Warning: File was packed with version ${packedData.version}, current version is 1.0.0`);
+  // Check version
+  if (!lines[0].includes('PACKED FILES v2.0.0')) {
+    console.warn(`⚠️  Warning: File might be in old format. Trying to parse anyway.`);
   }
 
-  console.log(`📅 Original timestamp: ${packedData.timestamp}`);
-  console.log(`📁 Unpacking ${packedData.files.length} files to: ${outputDir}`);
+  let currentFile = null;
+  const files = [];
 
-  for (const file of packedData.files) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (line.startsWith('// ===== FILE: ') && line.endsWith(' =====')) {
+      // Start of new file
+      if (currentFile) {
+        files.push({
+          path: currentFile.path,
+          content: currentFile.content.join('\n'),
+          isBinary: currentFile.isBinary
+        });
+      }
+
+      const filePath = line.replace('// ===== FILE: ', '').replace(' =====', '');
+      currentFile = {
+        path: filePath,
+        content: [],
+        isBinary: false
+      };
+    } else if (line.startsWith('// ===== END_FILE: ') && line.endsWith(' =====')) {
+      // End of current file
+      if (currentFile) {
+        files.push({
+          path: currentFile.path,
+          content: currentFile.content.join('\n'),
+          isBinary: currentFile.isBinary
+        });
+        currentFile = null;
+      }
+    } else if (currentFile) {
+      if (line === '[BASE64_BINARY]') {
+        currentFile.isBinary = true;
+        // Skip the [BASE64_BINARY] line and read next line as content
+        continue;
+      }
+      currentFile.content.push(line);
+    }
+  }
+
+  // Handle last file if not ended
+  if (currentFile) {
+    files.push({
+      path: currentFile.path,
+      content: currentFile.content.join('\n'),
+      isBinary: currentFile.isBinary
+    });
+  }
+
+  console.log(`📁 Unpacking ${files.length} files to: ${outputDir}`);
+
+  for (const file of files) {
     const fullPath = path.join(outputDir, file.path);
     const dirPath = path.dirname(fullPath);
 
@@ -95,7 +155,49 @@ function unpackFile(inputFile, outputDir) {
     }
   }
 
-  console.log(`✅ Successfully unpacked ${packedData.files.length} files`);
+  console.log(`✅ Successfully unpacked ${files.length} files`);
+}
+
+/**
+ * Extract single file from packed file using regex
+ */
+function extractFile(inputFile, filePath, outputFile) {
+  console.log(`📦 Extracting file: ${filePath} from ${inputFile}`);
+
+  const packedContent = fs.readFileSync(inputFile, 'utf-8');
+
+  // Create regex to match the file content between separators
+  const fileRegex = new RegExp(
+    `// ===== FILE: ${filePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} =====\\n(.*?)\\n// ===== END_FILE: ${filePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')} =====`,
+    's'
+  );
+
+  const match = packedContent.match(fileRegex);
+
+  if (!match) {
+    throw new Error(`File ${filePath} not found in packed file`);
+  }
+
+  let content = match[1];
+
+  // Check if it's binary
+  if (content.startsWith('[BASE64_BINARY]\n')) {
+    content = content.replace('[BASE64_BINARY]\n', '');
+    const buffer = Buffer.from(content, 'base64');
+    if (outputFile) {
+      fs.writeFileSync(outputFile, buffer);
+      console.log(`✅ Extracted binary file to: ${outputFile}`);
+    } else {
+      console.log(`Binary file content (base64): ${content}`);
+    }
+  } else {
+    if (outputFile) {
+      fs.writeFileSync(outputFile, content, 'utf-8');
+      console.log(`✅ Extracted text file to: ${outputFile}`);
+    } else {
+      console.log(`File content:\n${content}`);
+    }
+  }
 }
 
 /**
@@ -106,15 +208,18 @@ function main() {
 
   if (args.length < 1) {
     console.log(`
-🔧 File Packer/Unpacker v1.0.0
+🔧 File Packer/Unpacker v2.0.0
 
 Usage:
-  pack <sourceDir> <outputFile>    - Pack directory into single file
-  unpack <inputFile> <outputDir>   - Unpack file back to directory structure
+  pack <sourceDir> <outputFile>        - Pack directory into single text file
+  unpack <inputFile> <outputDir>       - Unpack file back to directory structure
+  extract <inputFile> <filePath> [outputFile] - Extract single file (output to stdout if no outputFile)
 
 Examples:
-  pack src/ src.packed.json
-  unpack src.packed.json src-restored/
+  pack src/ src.packed.txt
+  unpack src.packed.txt src-restored/
+  extract src.packed.txt package.json
+  extract src.packed.txt src/index.ts extracted.ts
 `);
     process.exit(1);
   }
@@ -137,11 +242,18 @@ Examples:
         unpackFile(args[1], args[2]);
         break;
 
+      case 'extract':
+        if (args.length < 3) {
+          throw new Error('extract command requires at least 2 arguments: <inputFile> <filePath> [outputFile]');
+        }
+        extractFile(args[1], args[2], args[3]);
+        break;
+
       default:
         throw new Error(`Unknown command: ${command}`);
     }
   } catch (error) {
-    console.error(`❌ Error: ${error.message}`);
+    console.error(`❌ Error: ${error.message || error}`);
     process.exit(1);
   }
 }
@@ -151,4 +263,4 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { packDirectory, unpackFile, getAllFiles, isBinaryFile };
+module.exports = { packDirectory, unpackFile, extractFile, getAllFiles, isBinaryFile };
