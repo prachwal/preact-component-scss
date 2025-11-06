@@ -209,7 +209,7 @@ button {
 
   // Size variants
   &--small {
-    padding: calc(var(--spacing-base) * 0.5) calc(var(--spacing-base) * 1);
+    padding: var(--spacing-xs) var(--spacing-sm); // Further reduced padding for small buttons
     font-size: calc(var(--font-size-base) * 0.875);
     border-radius: calc(var(--border-radius-base) * 0.375);
   }

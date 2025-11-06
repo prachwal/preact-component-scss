@@ -15,8 +15,7 @@ a {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  display: block; // Changed from flex to block to remove vertical centering
   min-width: 320px;
   min-height: 100vh;
   padding: 0.5rem; // Minimal padding for mobile
@@ -25,7 +24,7 @@ body {
 #app {
   max-width: min(1280px, 90vw);
   margin: 0 auto;
-  padding: 1rem; // Minimal padding for mobile
+  padding: 0 1rem 1rem; // Only horizontal padding, removed top padding
   text-align: center;
 }
 
@@ -55,10 +54,12 @@ main {
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-base); // Smaller gap for mobile
+  margin-top: 1rem; // Add top margin instead of relying on body padding
+  margin-bottom: 1rem; // Add bottom margin
 }
 
 section.card {
-  padding: var(--spacing-base); // Smaller padding for mobile
+  // Removed padding - now handled by .card class only
   border-radius: var(--border-radius-lg);
   background-color: var(--color-card-bg);
   border: 1px solid var(--color-card-border);
@@ -67,8 +68,8 @@ section.card {
 
 // Card component styles - mobile optimized
 .card {
-  padding: calc(var(--spacing-base) * 0.5); // Minimal padding for mobile
-  margin: calc(var(--spacing-base) * 0.5) 0; // Smaller margins for mobile
+  padding: var(--spacing-sm); // Simplified padding without calc multiplier
+  margin: 0; // Removed margin - gap now handled by parent containers
   border-radius: $border-radius-card;
   background: var(--color-card-bg);
   backdrop-filter: blur($blur-card);
@@ -80,18 +81,23 @@ section.card {
   color: var(--color-read-docs);
   font-size: clamp(0.7rem, 2vw, 0.8rem); // Smaller base for mobile
   margin-top: var(--spacing-base);
-  padding: 0 calc(var(--spacing-base) * 0.25); // Minimal padding for mobile
+  padding: 0 var(--spacing-xs); // Simplified horizontal padding
 }
 
 // Mobile-first progressive enhancements
 @media (min-width: $breakpoint-mobile) {
   // Enhanced mobile experience (480px+)
   body {
-    padding: 1rem;
+    padding: 0 1rem var(--footer-height) 1rem; // Only horizontal padding, keep bottom for footer
   }
 
   #app {
-    padding: clamp(1rem, 4vw, 2rem);
+    padding: 0 clamp(1rem, 4vw, 2rem) 1rem; // Only horizontal padding, keep bottom
+  }
+
+  main {
+    margin-top: var(--spacing-sm); // Smaller top margin on larger screens
+    margin-bottom: var(--spacing-sm);
   }
 
   .logo {
@@ -106,7 +112,7 @@ section.card {
 
   .read-the-docs {
     font-size: clamp(0.8rem, 2vw, 0.9rem);
-    padding: 0 calc(var(--spacing-base) * 0.5);
+    padding: 0 var(--spacing-sm); // Simplified horizontal padding
   }
 }
 
@@ -116,13 +122,9 @@ section.card {
     gap: var(--spacing-lg);
   }
 
-  section.card {
-    padding: var(--spacing-xl);
-  }
-
   .card {
-    padding: var(--spacing-base);
-    margin: var(--spacing-base) 0;
+    padding: var(--spacing-base); // Simplified padding
+    // Removed margin - gap handled by parent
   }
 
   h1 {

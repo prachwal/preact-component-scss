@@ -12,7 +12,7 @@ header {
   z-index: $z-index-header;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: calc(var(--spacing-base) * 0.3); // Minimal padding for mobile
+  padding: max(calc(var(--spacing-base) * 0.2), 0.3rem); // Reduced padding for more compact header
 
   .header-content {
     max-width: 1280px;
@@ -31,7 +31,7 @@ header {
     gap: calc(var(--spacing-base) * 0.2); // Smaller gap for mobile
 
     .logo {
-      height: clamp(1.8em, 12vw, 2.5em); // Smaller base for mobile
+      height: clamp(1.5em, 10vw, 2.2em); // Reduced logo size for more compact header
       width: auto;
       transition: transform var(--transition-base);
 
@@ -82,7 +82,7 @@ body {
 
     .logos .logo {
       height: clamp(2.2em, 10vw, 3em);
-      padding: calc(var(--spacing-base) * 0.15);
+      padding: max(calc(var(--spacing-base) * 0.15), 0.25rem); // Increased min padding
     }
   }
 }

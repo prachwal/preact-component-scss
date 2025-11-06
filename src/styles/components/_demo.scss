@@ -1,0 +1,66 @@
+// ===== DEMO GRID STYLES =====
+
+// Responsive grid layout
+.demo-grid {
+  display: grid;
+  gap: var(--spacing-base); // Gap between cards instead of card margins
+  margin: var(--spacing-base) 0; // Reduced from lg
+
+  // Mobile: 1 column
+  grid-template-columns: 1fr;
+
+  // Tablet: 3 columns
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  // Desktop: 6 columns
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+// Flex tiles demo
+.demo-flex-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-base); // Gap between tiles instead of margins
+  margin: var(--spacing-base) 0; // Reduced from lg
+
+  .demo-tile {
+    flex: 1 1 300px;
+    min-width: 250px;
+    max-width: 400px;
+  }
+}
+
+// Flex tiles demo
+.demo-flex-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-base); // Gap between tiles instead of margins
+  margin: var(--spacing-lg) 0;
+
+  .demo-tile {
+    flex: 1 1 300px;
+    min-width: 250px;
+    max-width: 400px;
+  }
+}
+
+// Demo section styling
+.demo-section {
+  margin: var(--spacing-base) 0; // Reduced from xl
+
+  h2 {
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  p {
+    margin-bottom: var(--spacing-base);
+    color: var(--color-text-muted);
+  }
+}
