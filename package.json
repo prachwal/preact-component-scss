@@ -47,6 +47,7 @@
     "docs": "typedoc --out docs src",
     "pack": "node scripts/pack-unpack.js pack src/ src.packed.json",
     "unpack": "node scripts/pack-unpack.js unpack src.packed.json src-unpacked/",
+    "clean:dist": "find src -name \"dist\" -type d -exec rm -rf {} + 2>/dev/null || true",
     "version-check": "node -e \"const { execSync } = require('child_process'); const fs = require('fs'); let pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8')); try { const published = execSync('npm view ' + pkg.name + ' version', { encoding: 'utf8' }).trim(); if (published === pkg.version) { console.log('Version ' + pkg.version + ' is already published. Bumping patch version...'); execSync('npm version patch --no-git-tag-version', { stdio: 'inherit' }); pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8')); console.log('Version bumped to: ' + pkg.version); } else { console.log('Local version (' + pkg.version + ') differs from published (' + published + '). No action needed.'); } } catch (e) { console.log('Package not found on npm or network error. This might be the first publish.'); }\"",
     "prepublishOnly": "npm run build:lib"
   },
