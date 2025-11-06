@@ -44,7 +44,6 @@ describe('Card', () => {
   it('does not overlap with sticky header', () => {
     const { container } = render(
       <div style={{ height: '200vh' }}>
-        {' '}
         // Symuluj scroll
         <Card size='large' variant='elevated' title='Test Card'>
           Tall content

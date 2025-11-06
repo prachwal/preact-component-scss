@@ -1,6 +1,6 @@
 {
   "name": "preact-component-scss",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A Preact component library with SCSS styling",
   "author": "Prachwal",
   "repository": {

@@ -3,6 +3,11 @@ import preact from '@preact/preset-vite'
 import dts from 'vite-plugin-dts'
 import { resolve } from 'path'
 import { readFileSync } from 'fs'
+import { fileURLToPath } from 'url'
+import cssnano from 'cssnano'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = resolve(__filename, '..')
 
 const packageJson = JSON.parse(readFileSync('./package.json', 'utf-8'))
 
@@ -30,7 +35,7 @@ export default defineConfig(({ mode }) => ({
   css: {
     postcss: {
       plugins: mode === 'production' ? [
-        require('cssnano')({
+        cssnano({
           preset: ['default', {
             discardComments: { removeAll: true },
             normalizeWhitespace: true,

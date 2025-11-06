@@ -25,16 +25,19 @@ function Header() {
 ## Architecture Overview
 This is a **dual-mode Preact component library** built with TypeScript and SCSS. The project supports both development/demo mode and library distribution mode.
 
+- **ES Module First**: `"type": "module"` in package.json - all .js files treated as ES modules
 - **Preact with React Compatibility**: Path aliases in `tsconfig.app.json` map `react`/`react-dom` to Preact's compat layer
 - **TypeScript Project References**: Split configs (`tsconfig.json` → `tsconfig.app.json` + `tsconfig.node.json`)
 - **Vite Dual Build**: App mode for development, library mode for npm publishing with `vite build --mode library`
 - **Component Architecture**: Each component in dedicated folder (`src/components/[ComponentName]/`) with `.tsx` + `.scss` files
+- **CommonJS Scripts**: Utility scripts use `.cjs` extension (e.g., `pack-unpack.cjs`)
 
 ## Component Patterns
 - **Directory Structure**: `src/components/[ComponentName]/[ComponentName].tsx` + dedicated SCSS
 - **Export Pattern**: Barrel exports via `src/components/index.ts` with typed interfaces
 - **State Management**: Prefer `@preact/signals` for reactive state (`useSignal(0)`, `count.value++`)
 - **JSX Transform**: Configured for Preact (`jsxImportSource: "preact"`)
+- **Polymorphic Components**: Card component supports different HTML tags via `as` prop
 
 ## Theme System Architecture
 **Complex theme provider** with three modes (dark/light/auto) and system preference detection:
@@ -97,9 +100,24 @@ npm run test:junit   # JUnit output for CI
 npm run test:coverage # Coverage reports
 ```
 
+**Code Quality**:
+```bash
+npm run lint         # ESLint v9 flat config
+npm run lint:fix     # Auto-fix ESLint issues
+npm run format       # Prettier formatting
+npm run format:check # Check formatting
+```
+
 **Documentation**:
 ```bash
 npm run docs         # TypeDoc generation
+```
+
+**Utility Scripts**:
+```bash
+npm run pack         # Pack src/ into src.packed.txt
+npm run unpack       # Unpack src.packed.txt to src-unpacked/
+npm run clean:dist   # Remove dist directories from src/
 ```
 
 **CSS Optimization**:
@@ -118,7 +136,8 @@ npm run docs         # TypeDoc generation
 - `src/global.d.ts` - TypeScript environment variable declarations
 
 **Build Configuration**:
-- `vite.config.ts` - Dual-mode build with CSS minification
+- `vite.config.ts` - Dual-mode build with CSS minification (ES module imports)
+- `eslint.config.js` - ESLint v9 flat config with browser globals
 - `tsconfig.*.json` - TypeScript project references
 - `.husky/pre-commit` - Version checking before commits
 
@@ -141,6 +160,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
 - localStorage persistence with error handling
 - System preference detection with media queries
 - SSR-safe implementation
+
+**Testing Setup** (`src/test/setup.ts`):
+```typescript
+// matchMedia mocking for theme tests
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: vi.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    // ... full mock implementation
+  }))
+});
+```
 
 **SCSS Organization**:
 ```
@@ -166,6 +198,7 @@ import 'preact-component-scss/styles';
 **Vite Configuration**:
 - Library mode: Externalizes Preact, outputs single ES module
 - App mode: Full development setup with HMR
+- ES module imports for cssnano and other dependencies
 
 **TypeScript Setup**:
 - Strict mode enabled (`noUnusedLocals`, `noUnusedParameters`)
@@ -215,7 +248,7 @@ npm publish           # Publish to npm (requires NPM_TOKEN)
 **Testing Setup**:
 - Vitest with jsdom environment
 - `@testing-library/preact` for component testing
-- `matchMedia` mocking for theme tests
+- `matchMedia` mocking for theme tests (see `src/test/setup.ts`)
 - Cleanup after each test
 
 **Theme Integration**:
@@ -223,10 +256,17 @@ npm publish           # Publish to npm (requires NPM_TOKEN)
 - Use CSS custom properties, not hardcoded colors
 - Test both light and dark themes
 
+**ESLint Configuration**:
+- ESLint v9 flat config format
+- Browser globals configured for DOM testing
+- CommonJS scripts (`.cjs`) excluded from strict rules
+- TypeScript-specific rules with Preact support
+
 ## Quality Assurance
 
 **Type Safety**: Strict TypeScript with comprehensive interfaces and type guards
 **Accessibility**: ARIA attributes, keyboard navigation, screen reader support
 **Performance**: Preact's lightweight runtime, efficient re-renders with signals
-**Cross-browser**: Modern CSS with fallbacks, SSR-safe theme detection</content>
+**Cross-browser**: Modern CSS with fallbacks, SSR-safe theme detection
+**Code Quality**: ESLint v9 + Prettier with automated formatting and linting</content>
 <parameter name="filePath">/home/prachwal/src/preact/preact-component-scss/.github/copilot-instructions.md

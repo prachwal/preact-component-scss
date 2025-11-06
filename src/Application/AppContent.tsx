@@ -21,7 +21,7 @@ export function AppContent() {
           </Card>
 
           <Card title='No Padding Card' noPadding>
-            <div style='padding: var(--spacing-base);'>
+            <div style={{ padding: 'var(--spacing-base)' }}>
               <p>This card has no default padding. The developer controls all spacing.</p>
               <Button size='small' variant='secondary'>
                 Custom Action

@@ -193,7 +193,7 @@ describe('Button Component', () => {
 
   describe('Forwarded Ref', () => {
     it('should forward ref to button element', () => {
-      const ref = { current: null } as React.RefObject<HTMLButtonElement>;
+      const ref = { current: null } as { current: HTMLButtonElement | null };
       render(<Button ref={ref}>Button</Button>);
 
       expect(ref.current).toBeInstanceOf(HTMLButtonElement);

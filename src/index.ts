@@ -9,7 +9,8 @@ export { ThemeProvider, useTheme } from './theme-provider';
 export type { Theme } from './theme-provider';
 
 // ===== Version =====
-export const VERSION = '2.0.0';
+import pkg from '../package.json';
+export const VERSION = pkg.version;
 
 // ===== Type Guards =====
 export const isValidTheme = (theme: unknown): theme is 'dark' | 'light' | 'auto' => {
