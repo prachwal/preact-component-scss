@@ -1,22 +1,26 @@
 // ===== DEMO GRID STYLES =====
+@use '../variables' as *;
 
 // Responsive grid layout
 .demo-grid {
   display: grid;
-  gap: var(--spacing-base); // Gap between cards instead of card margins
-  margin: var(--spacing-base) 0; // Reduced from lg
-
-  // Mobile: 1 column
+  gap: var(--spacing-base);
   grid-template-columns: 1fr;
 
-  // Tablet: 3 columns
-  @media (min-width: 768px) {
+  @media (min-width: $breakpoint-tablet) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  // Desktop: 6 columns
-  @media (min-width: 1024px) {
+  @media (min-width: $breakpoint-desktop) {
     grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+  }
+
+  // 2-column variant
+  &--2col {
+    @media (min-width: $breakpoint-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 }
 
@@ -24,43 +28,27 @@
 .demo-flex-tiles {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-base); // Gap between tiles instead of margins
-  margin: var(--spacing-base) 0; // Reduced from lg
+  gap: var(--spacing-base);
 
   .demo-tile {
-    flex: 1 1 300px;
-    min-width: 250px;
-    max-width: 400px;
-  }
-}
-
-// Flex tiles demo
-.demo-flex-tiles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-base); // Gap between tiles instead of margins
-  margin: var(--spacing-lg) 0;
-
-  .demo-tile {
-    flex: 1 1 300px;
-    min-width: 250px;
+    flex: 1 1 280px;
+    min-width: 260px;
     max-width: 400px;
   }
 }
 
 // Demo section styling
 .demo-section {
-  margin: var(--spacing-base) 0; // Reduced from xl
-
   h2 {
-    margin-bottom: var(--spacing-lg);
     font-size: var(--font-size-h2);
     font-weight: 600;
+    margin-bottom: var(--spacing-base);
     color: var(--color-text);
   }
 
   p {
-    margin-bottom: var(--spacing-base);
+    margin-bottom: var(--spacing-lg);
     color: var(--color-text-muted);
+    line-height: var(--line-height-base);
   }
 }
