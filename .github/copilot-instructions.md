@@ -55,6 +55,12 @@ npm run build:lib    # Library build for npm publishing
 npm run preview      # Preview production build
 ```
 
+**Version Management**:
+```bash
+npm run version-check  # Check published version and auto-bump if needed
+# Runs automatically via Husky pre-commit hook
+```
+
 **Testing Workflow**:
 ```bash
 npm run test         # Vitest with jsdom
@@ -68,12 +74,23 @@ npm run test:coverage # Coverage reports
 npm run docs         # TypeDoc generation
 ```
 
+**CSS Optimization**:
+- **Production builds** automatically minify CSS with cssnano
+- **Comments removed**, whitespace normalized, fonts optimized
+- **12.78 kB → 2.98 kB gzipped** typical reduction
+
 ## Key Files & Patterns
 
 **Entry Points**:
 - `src/index.ts` - Library exports (components, theme, utils)
 - `src/main.tsx` - App bootstrap for development
 - `src/app.tsx` - Demo component composition
+- `src/global.d.ts` - TypeScript environment variable declarations
+
+**Build Configuration**:
+- `vite.config.ts` - Dual-mode build with CSS minification
+- `tsconfig.*.json` - TypeScript project references
+- `.husky/pre-commit` - Version checking before commits
 
 **Component Example** (`src/components/Button/Button.tsx`):
 ```tsx
@@ -99,12 +116,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) =>
 ```
 src/styles/
 ├── main.scss           # Entry point (forwards variables, imports all)
-├── _variables.scss     # SCSS vars + CSS custom properties
-├── _base.scss          # Global styles
-├── _components.scss    # App-specific styles
+├── _variables.scss     # SCSS vars + CSS custom properties (consolidated)
+├── _base.scss          # Global styles (CSS vars moved to _variables.scss)
+├── _mixins.scss        # SCSS mixins
 ├── components/
 │   ├── index.scss      # Component imports
-│   ├── _button.scss    # Component-specific styles
+│   ├── _button.scss    # Component-specific styles (no duplicate :root)
 │   └── ...
 ```
 
@@ -124,6 +141,26 @@ import 'preact-component-scss/styles';
 - Strict mode enabled (`noUnusedLocals`, `noUnusedParameters`)
 - Path mapping for React compatibility
 - JSX transform for Preact
+- Global declarations in `src/global.d.ts` for Vite env vars
+
+## Version Management & Publishing
+
+**Automated Version Control**:
+- **Husky pre-commit hooks** run `npm run version-check` automatically
+- **Version bumping**: Auto-increments patch version when local matches published
+- **Safe publishing**: Prevents duplicate version releases
+
+**Publishing Workflow**:
+```bash
+npm run version-check  # Manual check (optional)
+npm run build:lib      # Build for npm
+npm publish           # Publish to npm (requires NPM_TOKEN)
+```
+
+**CI/CD Integration**:
+- GitHub Actions validates versions before publishing
+- Automatic publishing on main branch pushes
+- Version conflicts blocked at pipeline level
 
 ## Common Patterns
 
@@ -138,6 +175,12 @@ import 'preact-component-scss/styles';
 - `clamp()` for responsive scaling (no fixed breakpoints)
 - BEM-like naming: `.button--primary`, `.button__icon`
 - Component-specific styles in dedicated files
+- **Single :root block** in `_variables.scss` (no duplicates)
+
+**Version Management**:
+- Pre-commit hooks prevent version conflicts
+- Use `npm run version-check` before manual publishing
+- CI/CD validates version uniqueness before npm publish
 
 **Testing Setup**:
 - Vitest with jsdom environment
