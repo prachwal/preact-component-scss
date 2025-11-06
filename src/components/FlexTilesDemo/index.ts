@@ -1,1 +1,0 @@
-export { FlexTilesDemo } from './FlexTilesDemo';

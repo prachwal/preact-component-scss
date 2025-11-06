@@ -1,5 +1,27 @@
 # Preact Component Library with SCSS - AI Agent Instructions
 
+## Component Composition Guidelines
+
+**General layout components (Header, Main, Footer) should accept children for content instead of hardcoding content inside the components.** This ensures composability and reusability:
+
+```tsx
+// ✅ Good - Content passed as children
+<Header>
+  <h1>My Custom Title</h1>
+</Header>
+<Main>
+  <MyContent />
+</Main>
+<Footer>
+  <p>Custom footer content</p>
+</Footer>
+
+// ❌ Avoid - Hardcoded content in components
+function Header() {
+  return <header><h1>Hardcoded Title</h1></header>
+}
+```
+
 ## Architecture Overview
 This is a **dual-mode Preact component library** built with TypeScript and SCSS. The project supports both development/demo mode and library distribution mode.
 

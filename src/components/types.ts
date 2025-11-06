@@ -1,5 +1,4 @@
-import type { JSX } from 'preact';
-import type { ComponentChildren } from 'preact';
+import type { JSX, ComponentChildren } from 'preact';
 
 /**
  * Base props interface for all components
@@ -14,7 +13,8 @@ export interface BaseProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'size' 
 /**
  * Base props for button-like components
  */
-export interface BaseButtonProps extends Omit<JSX.HTMLAttributes<HTMLButtonElement>, 'size' | 'ref'> {
+export interface BaseButtonProps
+  extends Omit<JSX.HTMLAttributes<HTMLButtonElement>, 'size' | 'ref'> {
   className?: string;
   children?: ComponentChildren;
   disabled?: boolean;

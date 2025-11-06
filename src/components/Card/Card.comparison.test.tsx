@@ -13,13 +13,11 @@ describe('Card vs section.card comparison', () => {
 
   it('Card component should render equivalent to section.card', () => {
     // Render the new Card component
-    const { container: cardContainer } = render(
-      <Card>{testContent}</Card>
-    );
+    const { container: cardContainer } = render(<Card>{testContent}</Card>);
 
     // Render the old section.card approach
     const { container: sectionContainer } = render(
-      <section className="card">{testContent}</section>
+      <section className='card'>{testContent}</section>
     );
 
     // Compare the outer HTML structure
@@ -48,7 +46,7 @@ describe('Card vs section.card comparison', () => {
 
   it('Card with title should have proper header structure', () => {
     const { container } = render(
-      <Card title="Test Title">
+      <Card title='Test Title'>
         <Button size='medium'>Test Button</Button>
         <p>Test content</p>
       </Card>
@@ -72,13 +70,14 @@ describe('Card vs section.card comparison', () => {
 
   it('Card should support different variants', () => {
     const variants: Array<'default' | 'elevated' | 'outlined' | 'filled'> = [
-      'default', 'elevated', 'outlined', 'filled'
+      'default',
+      'elevated',
+      'outlined',
+      'filled',
     ];
 
     variants.forEach(variant => {
-      const { container } = render(
-        <Card variant={variant}>Content</Card>
-      );
+      const { container } = render(<Card variant={variant}>Content</Card>);
       const cardElement = container.firstElementChild;
       expect(cardElement?.className).toContain(`card--${variant}`);
     });
@@ -88,9 +87,7 @@ describe('Card vs section.card comparison', () => {
     const sizes: Array<'small' | 'medium' | 'large'> = ['small', 'medium', 'large'];
 
     sizes.forEach(size => {
-      const { container } = render(
-        <Card size={size}>Content</Card>
-      );
+      const { container } = render(<Card size={size}>Content</Card>);
       const cardElement = container.firstElementChild;
       expect(cardElement?.className).toContain(`card--${size}`);
     });

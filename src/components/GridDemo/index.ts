@@ -1,1 +1,0 @@
-export { GridDemo } from './GridDemo';

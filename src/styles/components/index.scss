@@ -1,12 +1,12 @@
 // Components SCSS index - central import point for all component styles
 
 // Forward variables so other files can use them
-@forward '../variables';
+@forward "../variables";
 
 // Import all component styles
-@use '_button';
-@use '_card';
-@use '_header';
-@use '_footer';
-@use '_main';
-@use '_demo';
+@use "_button";
+@use "_card";
+@use "_header";
+@use "_footer";
+@use "_main";
+@use "_demo";

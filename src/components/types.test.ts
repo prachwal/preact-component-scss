@@ -11,8 +11,9 @@ describe('exhaustiveCheck', () => {
   });
 
   it('throws on invalid value', () => {
-    expect(() => exhaustiveCheck('invalid' as any, ['dark', 'light', 'auto'] as const))
-      .toThrow('Invalid value: invalid. Allowed values: dark, light, auto');
+    expect(() => exhaustiveCheck('invalid' as string, ['dark', 'light', 'auto'] as const)).toThrow(
+      'Invalid value: invalid. Allowed values: dark, light, auto'
+    );
   });
 });
 

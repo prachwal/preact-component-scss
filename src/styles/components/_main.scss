@@ -1,5 +1,5 @@
 // Main component styles - Mobile-first
-@use '../variables' as *;
+@use "../variables" as *;
 
 // Margins are now handled in _base.scss with smaller values
 // Removed problematic clamp() overrides that caused stacking

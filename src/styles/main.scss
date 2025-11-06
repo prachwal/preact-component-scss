@@ -1,13 +1,13 @@
 // Main SCSS entry point
 
 // Forward variables so other files can use them
-@forward 'variables';
+@forward "variables";
 
 // Import mixins
-@use 'mixins';
+@use "mixins";
 
 // Import base styles (variables are forwarded, not re-imported)
-@use 'base';
+@use "base";
 
 // Import component styles
-@use 'components/index';
+@use "components/index";
