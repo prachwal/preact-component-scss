@@ -1,5 +1,6 @@
-import type { ComponentChildren, JSX } from 'preact';
+import type { ComponentChildren } from 'preact';
 import { forwardRef } from 'preact/compat';
+import type { BaseProps } from '../types';
 
 // Exported types
 export type CardSize = 'small' | 'medium' | 'large';
@@ -7,7 +8,7 @@ export type CardVariant = 'default' | 'elevated' | 'outlined' | 'filled';
 export type CardTag = 'section' | 'article' | 'main' | 'div' | 'aside';
 
 // Full interface with proper types
-export interface CardProps extends Omit<JSX.HTMLAttributes<HTMLElement>, 'size' | 'icon'> {
+export interface CardProps extends BaseProps {
   /** Card size variant affecting padding and header size @default 'medium' */
   size?: CardSize;
 

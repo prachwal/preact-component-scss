@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/preact'
+import { render, screen, fireEvent } from '@testing-library/preact'
 import { App } from './app.tsx'
 import { ThemeProvider } from './theme-provider.tsx'
 
@@ -37,5 +37,27 @@ describe('App', () => {
     expect(viteLogo.className).toContain('logo')
     expect(preactLogo.className).toContain('logo')
     expect(preactLogo.className).toContain('preact')
+  })
+
+  it('should toggle theme when theme button is clicked', async () => {
+    const { rerender } = render(<ThemeProvider><App /></ThemeProvider>)
+
+    const themeButton = screen.getByRole('switch', { name: /switch theme/i })
+    expect(themeButton).toBeTruthy()
+
+    // Get initial theme class
+    const initialClass = document.documentElement.className
+    expect(initialClass).toMatch(/theme-(light|dark)/)
+
+    // Click to toggle theme
+    fireEvent.click(themeButton)
+
+    // Force re-render for signals to update
+    rerender(<ThemeProvider><App /></ThemeProvider>)
+
+    // Theme should have changed
+    const newClass = document.documentElement.className
+    expect(newClass).not.toBe(initialClass) // Verify actual change
+    expect(newClass).toMatch(/theme-(light|dark)/)
   })
 })

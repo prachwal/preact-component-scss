@@ -17,6 +17,13 @@ export default defineConfig(({ mode }) => ({
     })] : [])
   ],
   root: resolve(__dirname, '.'),
+  resolve: {
+    alias: {
+      'react': 'preact/compat',
+      'react-dom': 'preact/compat',
+      'react/jsx-runtime': 'preact/compat/jsx-runtime'
+    }
+  },
   define: {
     __APP_VERSION__: JSON.stringify(packageJson.version)
   },
@@ -64,6 +71,7 @@ export default defineConfig(({ mode }) => ({
     })
   },
   test: {
+    root: resolve(__dirname, '.'),
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
     globals: true,

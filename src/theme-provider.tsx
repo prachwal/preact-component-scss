@@ -1,6 +1,7 @@
 import { createContext, type ComponentChildren } from 'preact';
 import { useContext, useEffect, useCallback } from 'preact/hooks';
 import { useSignal, Signal } from '@preact/signals';
+import { exhaustiveCheck } from './components/types';
 
 import './styles/main.scss';
 
@@ -110,6 +111,7 @@ export function ThemeProvider({
   const storage = new StorageManager(storageKey);
   
   const setTheme = useCallback((newTheme: Theme) => {
+    exhaustiveCheck(newTheme, ['dark', 'light', 'auto'] as const);
     theme.value = newTheme;
     storage.set(newTheme);
     applyTheme(newTheme, resolvedTheme);

@@ -39,13 +39,6 @@ main {
   gap: var(--spacing-xl);
 }
 
-main {
-  padding: var(--spacing-xl) 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
 // Logo styles
 .logo {
   height: 2.5rem;

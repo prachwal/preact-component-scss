@@ -1,5 +1,9 @@
 // Components index - central export point for all components
 
+// ===== Shared Types =====
+export type { BaseProps } from './types';
+export { exhaustiveCheck } from './types';
+
 // ===== Layout Components =====
 export { Header } from './Header'
 export { Main } from './Main'

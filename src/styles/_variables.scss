@@ -106,7 +106,12 @@ $z-index-tooltip: 1100;
   --color-secondary-hover: #4b5563;
   --color-secondary-foreground: #f9fafb;
 
+  --color-ghost: transparent;
   --color-ghost-hover: rgba(255, 255, 255, 0.05);
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-danger-foreground: #ffffff;
 
   // ===== Shadows =====
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -137,6 +142,10 @@ $z-index-tooltip: 1100;
   --color-secondary-foreground: #111827;
 
   --color-ghost-hover: rgba(0, 0, 0, 0.05);
+
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-foreground: #ffffff;
 
   // Shadows dla light theme
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.08);

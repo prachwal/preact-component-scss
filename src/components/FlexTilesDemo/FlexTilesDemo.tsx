@@ -1,47 +1,48 @@
 import { Card } from '../Card';
 import { Button } from '../Button';
+import { ICONS } from '../../constants/icons';
 
 export function FlexTilesDemo() {
   const tiles = [
     {
       title: 'Welcome',
       content: 'Welcome to our component library demo. This showcases flex-based tile layout.',
-      icon: '🏠',
+      icon: ICONS.home,
       variant: 'elevated' as const,
       size: 'large' as const
     },
     {
       title: 'Components',
       content: 'Explore our collection of reusable Preact components with TypeScript support.',
-      icon: '🧩',
+      icon: ICONS.puzzle,
       variant: 'outlined' as const,
       size: 'medium' as const
     },
     {
       title: 'Responsive',
       content: 'All components are fully responsive and work great on any device size.',
-      icon: '📱',
+      icon: ICONS.phone,
       variant: 'filled' as const,
       size: 'medium' as const
     },
     {
       title: 'Theme Support',
       content: 'Dark/light theme support with automatic system preference detection.',
-      icon: '🌙',
+      icon: ICONS.moon,
       variant: 'default' as const,
       size: 'medium' as const // Changed from small to medium for longer content
     },
     {
       title: 'TypeScript',
       content: 'Full TypeScript support with comprehensive type definitions.',
-      icon: '📝',
+      icon: ICONS.pencil,
       variant: 'elevated' as const,
       size: 'medium' as const // Changed from small to medium for longer content
     },
     {
       title: 'Performance',
       content: 'Optimized for performance with Preact signals and efficient re-rendering.',
-      icon: '⚡',
+      icon: ICONS.bolt,
       variant: 'outlined' as const,
       size: 'large' as const
     }

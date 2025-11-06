@@ -1,9 +1,16 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/preact'
 import { Button } from './Button.tsx'
+import { ICONS } from '../../constants/icons'
 
 describe('Button Component', () => {
   describe('Rendering', () => {
+
+    it('should render danger variant', () => {
+      render(<Button variant="danger">Danger</Button>);
+      expect(screen.getByRole('button').className).toContain('button--danger');
+    });
+
     it('should render with default props', () => {
       render(<Button>Click me</Button>)
       const button = screen.getByRole('button', { name: /click me/i })
@@ -43,7 +50,7 @@ describe('Button Component', () => {
 
   describe('Icons', () => {
     it('should render with start icon', () => {
-      render(<Button icon={<span data-testid="icon">🔥</span>}>Text</Button>)
+      render(<Button icon={<span data-testid="icon">{ICONS.bolt}</span>}>Text</Button>)
       
       expect(screen.getByTestId('icon')).toBeTruthy()
       expect(screen.getByText('Text')).toBeTruthy()
@@ -57,10 +64,10 @@ describe('Button Component', () => {
     })
 
     it('should render icon without text', () => {
-      render(<Button icon={<span data-testid="icon">🔥</span>} aria-label="Fire button" />)
+      render(<Button icon={<span data-testid="icon">{ICONS.bolt}</span>} aria-label="Bolt button" />)
       
       expect(screen.getByTestId('icon')).toBeTruthy()
-      expect(screen.getByLabelText('Fire button')).toBeTruthy()
+      expect(screen.getByLabelText('Bolt button')).toBeTruthy()
     })
   })
 
@@ -76,7 +83,7 @@ describe('Button Component', () => {
 
     it('should hide icons when loading', () => {
       render(
-        <Button loading icon={<span data-testid="icon">🔥</span>}>
+        <Button loading icon={<span data-testid="icon">{ICONS.bolt}</span>}>
           Loading
         </Button>
       )
