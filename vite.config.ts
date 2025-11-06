@@ -20,9 +20,24 @@ export default defineConfig(({ mode }) => ({
   define: {
     __APP_VERSION__: JSON.stringify(packageJson.version)
   },
+  css: {
+    postcss: {
+      plugins: mode === 'production' ? [
+        require('cssnano')({
+          preset: ['default', {
+            discardComments: { removeAll: true },
+            normalizeWhitespace: true,
+            minifyFontValues: true,
+            minifyGradients: true
+          }]
+        })
+      ] : []
+    }
+  },
   build: {
     outDir: 'dist',
     ...(mode === 'library' && {
+      root: resolve(__dirname, '.'),
       lib: {
         entry: resolve(__dirname, 'src/index.ts'),
         name: 'PreactComponentScss',

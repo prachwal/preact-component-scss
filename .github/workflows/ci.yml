@@ -142,4 +142,4 @@ jobs:
       if: steps.npm-version.outputs.current_version != steps.npm-version.outputs.local_version
       run: |
         echo "Publishing version ${{ steps.npm-version.outputs.local_version }} to NPM..."
-        npm publish
+        npm publish --access public

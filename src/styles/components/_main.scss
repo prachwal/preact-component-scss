@@ -1,0 +1,25 @@
+// Main component styles - Mobile-first
+@use '../variables' as *;
+
+main {
+  margin-top: clamp(40px, 10vh, 70px); // Minimal space for mobile
+  margin-bottom: clamp(30px, 8vh, 50px); // Minimal space for mobile
+  // min-height: calc(100vh - 200px); // Ensure minimum height
+}
+
+// Mobile-first progressive enhancements for main
+@media (min-width: $breakpoint-tablet) {
+  // Tablet optimizations (768px+)
+  main {
+    margin-top: clamp(50px, 12vh, 80px);
+    margin-bottom: clamp(40px, 10vh, 60px);
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  // Desktop enhancements (1024px+)
+  main {
+    margin-top: clamp(80px, 15vh, 120px);
+    margin-bottom: clamp(50px, 12vh, 80px);
+  }
+}

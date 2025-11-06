@@ -1,20 +1,6 @@
-// Base styles and CSS custom properties
+// Base styles - CSS custom properties are now in _variables.scss
 @use 'variables' as *;
 @use 'mixins' as *;
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: var(--color-text);
-  background-color: var(--color-bg);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 // Global element styles
 a {
@@ -33,44 +19,118 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  // padding: var(--spacing-base);
+  padding: 0.5rem; // Minimal padding for mobile
+}
+
+#app {
+  max-width: min(1280px, 90vw);
+  margin: 0 auto;
+  padding: 1rem; // Minimal padding for mobile
+  text-align: center;
+}
+
+// Logo styles - mobile optimized
+.logo {
+  height: clamp(2.5em, 18vw, 4em); // Start small for mobile
+  padding: calc(var(--spacing-base) * 0.5); // Minimal padding for mobile
+  transition: filter 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em var(--color-logo-shadow));
+  }
+
+  &.preact:hover {
+    filter: drop-shadow(0 0 2em var(--color-preact-shadow));
+  }
 }
 
 h1 {
-  font-size: var(--font-size-h1);
+  font-size: clamp(1.5rem, 8vw, 2rem); // Smaller base for mobile
   line-height: $line-height-h1;
   margin: $margin-h1;
 }
 
-button {
-  border-radius: $border-radius-button;
-  border: 1px solid transparent;
-  padding: $padding-button;
-  font-size: var(--font-size-base);
-  font-weight: $font-weight-button;
-  font-family: inherit;
-  background-color: var(--color-button-bg);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: $transition-button;
-
-  &:hover {
-    border-color: var(--color-link);
-  }
-
-  &:focus,
-  &:focus-visible {
-    outline: $outline-focus;
-  }
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-base); // Smaller gap for mobile
 }
 
-// Mobile-first responsive adjustments
-@media (max-width: $breakpoint-tablet) {
+section.card {
+  padding: var(--spacing-base); // Smaller padding for mobile
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-lg);
+}
+
+// Card component styles - mobile optimized
+.card {
+  padding: calc(var(--spacing-base) * 0.5); // Minimal padding for mobile
+  margin: calc(var(--spacing-base) * 0.5) 0; // Smaller margins for mobile
+  border-radius: $border-radius-card;
+  background: var(--color-card-bg);
+  backdrop-filter: blur($blur-card);
+  border: 1px solid var(--color-card-border);
+}
+
+// Read the docs text - mobile optimized
+.read-the-docs {
+  color: var(--color-read-docs);
+  font-size: clamp(0.7rem, 2vw, 0.8rem); // Smaller base for mobile
+  margin-top: var(--spacing-base);
+  padding: 0 calc(var(--spacing-base) * 0.25); // Minimal padding for mobile
+}
+
+// Mobile-first progressive enhancements
+@media (min-width: $breakpoint-mobile) {
+  // Enhanced mobile experience (480px+)
   body {
     padding: 1rem;
   }
 
-  h1 {
-    font-size: clamp(1.8rem, 10vw, 2.5rem);
+  #app {
+    padding: clamp(1rem, 4vw, 2rem);
   }
+
+  .logo {
+    height: clamp(3em, 15vw, 5em);
+    padding: calc(var(--spacing-base) * 0.75);
+  }
+
+  .card {
+    padding: calc(var(--spacing-base) * 0.75);
+    margin: calc(var(--spacing-base) * 0.75) 0;
+  }
+
+  .read-the-docs {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    padding: 0 calc(var(--spacing-base) * 0.5);
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  // Tablet optimizations (768px+)
+  main {
+    gap: var(--spacing-lg);
+  }
+
+  section.card {
+    padding: var(--spacing-xl);
+  }
+
+  .card {
+    padding: var(--spacing-base);
+    margin: var(--spacing-base) 0;
+  }
+
+  h1 {
+    font-size: var(--font-size-h1);
+  }
+}
+
+@media (min-width: $breakpoint-desktop) {
+  // Desktop enhancements (1024px+)
+  // Additional desktop-specific styles can be added here
 }

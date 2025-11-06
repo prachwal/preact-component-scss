@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Prevent build artifacts in src/
+src/**/*.js
+src/**/*.d.ts
+src/dist/
+src/**/dist/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -29,3 +35,4 @@ test-results.xml
 
 # docs
 docs
+src.packed.json

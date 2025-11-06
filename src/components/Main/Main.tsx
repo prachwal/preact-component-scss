@@ -1,4 +1,5 @@
 import { useSignal } from '@preact/signals'
+import { Button } from '../Button'
 
 export function Main() {
   const count = useSignal(0)
@@ -6,9 +7,11 @@ export function Main() {
   return (
     <main>
       <section class="card">
-        <button onClick={() => count.value++}>
+        <Button 
+          size='medium'
+          onClick={() => count.value++}>
           count is {count}
-        </button>
+        </Button>
         <p>
           Edit <code>src/app.tsx</code> and save to test HMR
         </p>

@@ -1,7 +1,13 @@
-// SCSS Variables
+// SCSS Variables - tylko wartości niedostępne jako CSS custom properties
+// Używaj CSS custom properties dla wartości dynamicznych!
+
+// Breakpoints - jako SCSS variables bo używane w @media queries
 $breakpoint-tablet: 768px;
 $breakpoint-mobile: 480px;
+$breakpoint-desktop: 1024px;
+$breakpoint-wide: 1440px;
 
+// Static values dla kompilatora SCSS
 $border-radius-button: 8px;
 $border-radius-card: 12px;
 $padding-button: 0.6em 1.2em;
@@ -13,31 +19,181 @@ $line-height-h1: 1.1;
 $margin-h1: 0.5em 0;
 $outline-focus: 4px auto -webkit-focus-ring-color;
 
-:root {
-  // Responsive font scaling
-  --font-size-base: clamp(14px, 2.5vw, 18px);
-  --font-size-h1: clamp(2rem, 8vw, 3.2em);
-  --spacing-base: clamp(1rem, 4vw, 2rem);
-  --logo-size: clamp(4em, 12vw, 6em);
+// Z-index layers
+$z-index-header: 100;
+$z-index-footer: 100;
+$z-index-modal: 1000;
+$z-index-tooltip: 1100;
 
-  // Default colors (dark theme)
+// CSS Custom Properties - dynamiczne wartości
+:root {
+  // ===== Base Styles =====
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // ===== Spacing & Layout =====
+  --spacing-xs: clamp(0.25rem, 1vw, 0.5rem);
+  --spacing-sm: clamp(0.5rem, 2vw, 1rem);
+  --spacing-base: clamp(1rem, 4vw, 2rem);
+  --spacing-lg: clamp(1.5rem, 6vw, 3rem);
+  --spacing-xl: clamp(2rem, 8vw, 4rem);
+
+  // ===== Typography =====
+  --font-size-xs: clamp(0.75rem, 2vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 2.25vw, 1rem);
+  --font-size-base: clamp(1rem, 2.5vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 3vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 3.5vw, 1.5rem);
+  --font-size-h1: clamp(2rem, 8vw, 3.2em);
+  --font-size-h2: clamp(1.5rem, 6vw, 2.5em);
+  --font-size-h3: clamp(1.25rem, 5vw, 2em);
+
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.75;
+
+  // ===== Border Radius =====
+  --border-radius-xs: clamp(1px, 0.5vw, 2px);
+  --border-radius-sm: clamp(2px, 1vw, 4px);
+  --border-radius-base: clamp(4px, 2vw, 8px);
+  --border-radius-lg: clamp(6px, 3vw, 12px);
+  --border-radius-xl: clamp(8px, 4vw, 16px);
+  --border-radius-full: 9999px;
+
+  // ===== Transitions =====
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  // ===== Sizes =====
+  --logo-size: clamp(4em, 12vw, 6em);
+  --header-height: clamp(60px, 10vh, 80px);
+  --footer-height: clamp(50px, 8vh, 70px);
+
+  // ===== Colors - Dark Theme (default) =====
   --color-text: rgba(255, 255, 255, 0.87);
+  --color-text-muted: rgba(255, 255, 255, 0.6);
   --color-bg: #242424;
-  --color-link: #646cff;
-  --color-link-hover: #535bf2;
+  --color-bg-elevated: #2a2a2a;
+  
+  --color-link: #0056b3; // WCAG AA compliant dark blue
+  --color-link-hover: #003d82; // Darker blue for hover
+  
   --color-button-bg: #1a1a1a;
+  
   --color-logo-shadow: #646cffaa;
   --color-preact-shadow: #673ab8aa;
+  
   --color-card-bg: rgba(255, 255, 255, 0.05);
   --color-card-border: rgba(255, 255, 255, 0.1);
+  
   --color-read-docs: #888;
+  
+  --color-foreground: rgba(255, 255, 255, 0.87);
+
+  // ===== Button Colors =====
+  --color-primary: #646cff;
+  --color-primary-hover: #535bf2;
+  --color-primary-active: #4248d4;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #374151;
+  --color-secondary-hover: #4b5563;
+  --color-secondary-active: #374151;
+  --color-secondary-foreground: #f9fafb;
+  --color-secondary-border: #4b5563;
+  --color-secondary-border-hover: #6b7280;
+
+  --color-ghost-hover: rgba(255, 255, 255, 0.05);
+  --color-ghost-active: rgba(255, 255, 255, 0.1);
+  --color-ghost-border-hover: rgba(255, 255, 255, 0.1);
+
+  --color-danger: #dc2626;
+  --color-danger-hover: #b91c1c;
+  --color-danger-active: #991b1b;
+  --color-danger-foreground: #ffffff;
+
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  // ===== Focus & States =====
+  --color-focus: #646cff;
+  --color-focus-ring: rgba(100, 108, 255, 0.4);
+
+  // ===== Shadows =====
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
 }
 
-// Light theme overrides
+// ===== Light Theme Overrides =====
 .theme-light {
   --color-text: #213547;
+  --color-text-muted: #64748b;
   --color-bg: #ffffff;
-  --color-link-hover: #747bff;
-  --color-button-bg: #cccccc;
-  --color-card-bg: rgba(0, 0, 0, 0.05);
+  --color-bg-elevated: #f9fafb;
+  
+  --color-link: #0056b3; // Same accessible blue for consistency
+  --color-link-hover: #003d82; // Darker hover for light theme
+  
+  --color-button-bg: #f3f4f6;
+  
+  --color-card-bg: rgba(0, 0, 0, 0.02);
+  --color-card-border: rgba(0, 0, 0, 0.08);
+  
+  --color-foreground: #213547;
+
+  // Button overrides for light theme
+  --color-secondary: #f3f4f6;
+  --color-secondary-hover: #e5e7eb;
+  --color-secondary-active: #d1d5db;
+  --color-secondary-foreground: #111827;
+  --color-secondary-border: #d1d5db;
+  --color-secondary-border-hover: #9ca3af;
+
+  --color-ghost-hover: rgba(0, 0, 0, 0.05);
+  --color-ghost-active: rgba(0, 0, 0, 0.1);
+  --color-ghost-border-hover: rgba(0, 0, 0, 0.1);
+
+  // Shadows dla light theme
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+  --shadow-base: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.25);
+}
+
+// ===== Dark Theme Explicit =====
+.theme-dark {
+  // Możesz dodać specyficzne overrides dla dark theme
+  // jeśli różnią się od defaultowych wartości w :root
+}
+
+// ===== Accessibility =====
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+  }
+}
+
+// ===== High Contrast Mode =====
+@media (prefers-contrast: high) {
+  :root {
+    --color-card-border: rgba(255, 255, 255, 0.3);
+  }
+  
+  .theme-light {
+    --color-card-border: rgba(0, 0, 0, 0.3);
+  }
 }
